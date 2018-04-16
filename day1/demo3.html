@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>谁去拿外卖</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background-color: #222;
+            padding-top: 150px;
+        }
+        h3 {
+            width: 800px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 32px;
+            color: #fff;
+            background-color: green;
+            margin: 0 auto;
+        }
+        .box{
+            height: 400px;
+            width: 800px;
+            margin: 0 auto;
+            background-color: #666;
+            position: relative;
+        }
+        .box li{
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            height: 60px;
+            width: 150px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        .box li:nth-child(2){
+            left: 50%;
+            margin-left: -75px;
+        }
+        .box li:nth-child(3){
+            left: 100%;
+            margin-left: -170px;
+        }
+        .box li:nth-child(4){
+            bottom: 200px;
+        }
+        .box li:nth-child(5){
+            left: 50%;
+            margin-left: -75px;
+            bottom: 200px;
+        }
+        .box li:nth-child(6){
+            left: 100%;
+            margin-left: -170px;
+            bottom: 200px;
+        }
+        .box li p{
+            text-align: center;
+            line-height: 60px;
+        }
+        .box li i{
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            height: 20px;
+            width: 20px;
+            background-color: red;
+            cursor: pointer;
+            text-align: center;
+            line-height: 20px;
+            font-size: 16px;
+            border-radius: 50%;
+            display: none;
+        }
+        .control{
+            height: 60px;
+            width: 800px;
+            background-color: green;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .control button{
+            display: inline-block;
+            width: 200px;
+            height: 60px;
+            font-size: 26px;
+        }
+        .box .now{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<h3>谁去拿外卖?</h3>
+<div class="box">
+    <ul>
+        <li>
+            <i>×</i>
+            <p>李强强</p>
+        </li>
+        <li>
+            <i>×</i>
+            <p>陈志春</p>
+        </li>
+        <li>
+            <i>×</i>
+            <p>黄旭</p>
+        </li>
+        <li>
+            <i>×</i>
+            <p>胡建兵</p>
+        </li>
+        <li>
+            <i>×</i>
+            <p>本人</p>
+        </li>
+        <li>
+            <i>×</i>
+            <p>王潍</p>
+        </li>
+    </ul>
+</div>
+<div class="control">
+    <button id="start">随机选择</button>
+    <button id="edit">编辑</button>
+    <script>
+        // 1:点击编辑出现删除按钮，并可以对元素进行删除操作
+        var edit = document.getElementById('edit');
+        var start = document.getElementById('start');
+        var icons = document.querySelectorAll('.box li i');
+        var arr = [].slice.call(icons);
+        console.log(arr);
+        edit.onclick = function(){
+            if(edit.innerHTML=='编辑'){
+                arr.forEach(function (value) {
+                    value.style.display = 'block';
+                });
+                edit.innerHTML = '编辑完成';
+            }else{
+                arr.forEach(function (value) {
+                    value.style.display = 'none';
+                });
+                edit.innerHTML = '编辑';
+                arr = [].slice.call(document.querySelectorAll('.box li i'));
+            }
+        };
+        arr.forEach(function (value) {
+            value.onclick = function () {
+                this.parentNode.parentNode.removeChild(this.parentNode);
+            }
+        });
+        // 2:随机选择一个人，并且高亮
+        var flang = true;
+        start.onclick = function(){
+            if(!flang){
+                return false;
+            }
+            flang = false;
+            var random = Math.ceil(Math.random()*20)+50;
+            var i =0;
+            var timmer=setInterval(function () {
+                var index = parseInt(Math.random()*arr.length);
+                arr.forEach(function (value) {
+                   value.parentNode.className = '';
+                });
+                arr[index].parentNode.className = 'now';
+                i++;
+                console.log(i);
+                if(i>random){
+                    clearInterval(timmer);
+                    flang = true;
+                }
+            },100);
+        }
+    </script>
+</div>
+</body>
+</html>

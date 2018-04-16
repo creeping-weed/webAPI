@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画函数封装</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            background-color: deepskyblue;
+            height: 100px;
+            width: 60px;
+            position: absolute;
+            left: 0;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+
+</div>
+<script src="../library-hgx.js"></script>
+<script>
+    var box = document.querySelector('.box');
+    animate(box, {
+        left: '800px'
+    },function () {
+       animate(box,{
+           top: '500px',
+           height: '200px',
+           width: '200px'
+       })
+    });
+
+/*
+    function animate(element, obj, fn) {
+        for (var k in obj) {
+            var linner = getStyle(k);
+            var target = parseInt(obj[k]);
+            go(k,linner,target);
+        }
+        function go(k,linner, target) {
+            element.timer = setInterval(function () {
+                var temp = linner > target ? -10 : 10;
+                if (Math.abs(target - linner) > Math.abs(temp)) {
+                    linner += temp;
+                    element.style[k] = linner + 'px';
+                } else {
+                    clearInterval(element.timer);
+                    element.style[k] = obj[k];
+                    if (fn) {
+                        fn();
+                    }
+                }
+            }, 15)
+        }
+        function getStyle(item) {
+            return parseInt(getComputedStyle(element)[item]);
+        }
+    }
+*/
+
+/*
+    (function (window) {
+        // linder=linder+speed;
+        var animate = function (element, obj, fn) {
+            return new Animate(element, obj).go(fn);
+        };
+
+        function Animate(element, obj) {
+            this.element = element;
+            this.obj = obj;
+        }
+
+        Animate.prototype.getStyle = function () {
+            var obj = {};
+            for (var k in this.obj) {
+                obj[k] = parseInt(getComputedStyle(this.element)[k]);
+            }
+            return obj;
+        };
+        Animate.prototype.go = function (fn) {
+            var obj = this.getStyle();
+            for (var k in obj) {
+                this.setIn(k, obj[k], parseInt(this.obj[k]), fn);
+            }
+        };
+        Animate.prototype.setIn = function (attr, start, stop, fn) {
+            console.log(stop);
+            console.log(start);
+            var step = start > stop ? -10 : 10;
+            var linner = start;
+            var that = this;
+            var timer = setInterval(function () {
+                if (linner >= stop) {
+                    clearInterval(timer);
+                    if (fn) {
+                        fn();
+                    }
+                } else {
+                    linner = linner + step;
+                    that.element.style[attr] = linner + 'px';
+                }
+            }, 15)
+        };
+        window.animate = animate;
+    }(window));
+    animate(box, {
+        left: '500px'
+    }, function () {
+        animate(box, {
+            top: '600px'
+        })
+    })
+    */
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webAPI</title>
+</head>
+<body>
+<input type="text" name="" value="京东" id="jd">
+<input type="text" name="">
+<input type="text" name="">
+<input type="text" name="">
+<input type="text" name="">
+<input type="text" name="">
+<input type="checkbox">
+<script>
+    // <!--禁选多个文本框-->
+    var ck = document.querySelector('input[type=checkbox]');
+    var inps = document.querySelectorAll('input[type=text]');
+    ck.onclick = function () {
+        for(var i=0;i<inps.length;i++){
+            inps[i].disabled = ck.checked;
+        }
+    };
+
+    // 仿京东搜索
+    var jd = document.getElementById('jd');
+    var text = jd.value;
+    jd.onfocus = function () {
+        if(this.value==text){
+            this.value = '';
+        }
+    };
+    jd.onblur = function(){
+        if(!this.value){
+            this.value = text;
+        }
+    }
+</script>
+</body>
+</html>

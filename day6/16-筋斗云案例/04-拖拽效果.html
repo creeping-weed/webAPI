@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      cursor: move;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+<script>
+  var box = document.getElementById('box');
+  box.onmousedown = function(e){
+      e = e || window.event;
+      y = e.pageY - this.offsetTop;
+      x = e.pageX - this.offsetLeft;
+      document.onmousemove = function(e){
+          box.style.left = e.pageX - x +'px';
+          box.style.top = e.pageY - y +'px';
+      }
+  };
+  box.onmouseup = function(){
+      document.onmousemove = null;
+  }
+
+</script>
+
+</body>
+</html>

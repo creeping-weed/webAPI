@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      height: 4000px;
+    }
+    img {
+      /*transition: all 0.5s;*/
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<img src="images/tianshi.gif" id="ts" alt="">
+<script>
+var ts = document.getElementById('ts');
+document.onmousemove = function(e){
+    e = e || window.event;
+    console.log('x:'+e.pageX+'   '+e.pageY);
+    ts.style.top = e.pageY + 'px';
+    ts.style.left = e.pageX + 'px';
+}
+</script>
+</body>
+</html>

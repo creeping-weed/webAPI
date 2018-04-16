@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缓速动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: 100px;
+            width: 100px;
+            background-color: skyblue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    var box = document.querySelector('.box');
+    function animate2(element,target,callback){
+        element.timer = setInterval(function(){
+            var linner = element.offsetLeft;
+            var setp = (target-linner) / 10;
+            setp = setp>0?Math.ceil(setp):Math.floor(setp);
+            linner += setp;
+            element.style.left = linner+'px';
+            if(linner == target){
+                clearInterval(element.timer);
+                if(callback){
+                    callback();
+                }
+            }
+        },15)
+    }
+
+    animate2(box,800,function () {
+        animate2(box,400)
+    });
+</script>
+</body>
+</html>

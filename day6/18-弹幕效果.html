@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+  <!--告诉浏览器，用utf-8的编码来解析我这个代码-->
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+
+    html,body {
+      margin: 0px;
+      padding: 0px;
+      width: 100%;
+      height: 100%;
+      font-family: "微软雅黑";
+      font-size: 62.5%;
+      background: #ccc;
+    }
+
+    .boxDom {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .idDom {
+      width: 100%;
+      height: 60px;
+      background: #666;
+      position: fixed;
+      bottom: 0px;
+    }
+
+    .content {
+      display: inline-block;
+      width: 430px;
+      height: 40px;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      margin: auto;
+    }
+
+    .title {
+      display: inline;
+      /*font-size: 4em;*/
+      font-size:25px;
+      vertical-align: bottom;
+      color: #fff;
+    }
+
+    .text {
+      border: none;
+      width: 300px;
+      height: 30px;
+      border-radius: 5px;
+      /*font-size: 2.4em;*/
+      font-size: 15px;
+    }
+
+    .btn {
+      width: 60px;
+      height: 30px;
+      background: #f90000;
+      border: none;
+      color: #fff;
+      /*font-size: 2.4em;*/
+      font-size: 15px;
+    }
+
+    span {
+      height: 40px;
+      position: absolute;
+      overflow: hidden;
+      color: #000;
+      /*font-size: 4em;*/
+      font-size: 25px;
+      /*line-height: 1.5em;*/
+      line-height: 37.5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+<div class="boxDom" id="boxDom">
+  <div class="idDom" id="idDom">
+    <div class="content">
+      <p class="title">吐槽:</p>
+      <input type="text" class="text" id="text"/>
+      <button type="button" class="btn" id="btn">发射</button>
+    </div>
+  </div>
+</div>
+
+<script src="../library-hgx.js"></script>
+<script>
+  var boxDom = document.getElementById("boxDom");
+  var text = document.getElementById("text");
+  var btn = document.getElementById("btn");
+  //1. 给btn注册点击事件
+  //2. 获取文本框输入的内容
+  //3. 创建span，添加到boxDom
+  //4. 随机span的颜色
+  //5. 设置span的left值：可视区的宽度
+  //6. 设置span的top值：随机在0到 可视区高度/2  window.innerHeight
+  //7. 使用动画让span从最右边跑到最左边：left: -自己的宽度
+  //8. 动画结束的时候，还需要把span给删除
+  var arrColor = ['yellow','blue','black','red','green','orange'];
+  btn.onclick = function(){
+      var content = text.value;
+      text.value = '';
+      var span = document.createElement('span');
+      span.innerText = content;
+      span.style.color = arrColor[parseInt(Math.random()*arrColor.length)];
+      span.style.left=boxDom.clientWidth+'px';
+      span.style.top = parseInt(Math.random()*boxDom.clientHeight/3)+'px';
+      boxDom.appendChild(span);
+      animate(span,{
+          left: -(span.offsetWidth)
+      },function(){
+          span.remove();
+      })
+  };
+  document.onkeyup = function(e){
+      e= e || window.event;
+      if(e.keyCode == 13){
+          btn.click();
+      }
+  }
+</script>
+
+
+</body>
+</html>

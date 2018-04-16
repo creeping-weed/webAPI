@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>隐藏</button>
+<div class="box"></div>
+<script>
+    var box = document.querySelector('.box');
+    var btn = document.querySelector('button');
+    console.log(btn);
+    console.log(box);
+    setStyle(box,{
+        height:'300px',
+        width:'200px',
+        backgroundColor:'red'
+    });
+    // 设置css样式
+    function setStyle(element,obj,callback) {
+        for(var k in obj){
+            element.style[k]=obj[k];
+        }
+        if(callback){
+            callback.call(element);
+        }
+    }
+    btn.addEventListener('click',function () {
+        this.innerText=='隐藏'?setStyle(box,{display:'none'},function () {
+            btn.innerText='显示';
+        }):setStyle(box,{display:'block'},function () {
+            btn.innerText='隐藏';
+        });
+    })
+
+</script>
+</body>
+</html>

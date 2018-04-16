@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    select {
+      width: 150px;
+      height: 400px;
+      font: 24px/48px "宋体";
+      background-color: teal;
+    }
+  </style>
+</head>
+<body>
+
+<!-- multiple:多选 -->
+<select multiple id="s1">
+  <option>方方</option>
+  <option>韩韩</option>
+  <option>鹏鹏</option>
+  <option>雷雷</option>
+  <option>莲莲</option>
+  <option>聪哥</option>
+  <option>黄黄</option>
+  <option>华华</option>
+  <option>军军</option>
+  <option>琦琦</option>
+</select>
+<button id="btn1"> &gt;&gt; </button>
+<button id="btn2"> &lt;&lt; </button>
+<button id="btn3"> &gt; </button>
+<button id="btn4"> &lt; </button>
+<select multiple id="s2">
+
+</select>
+
+<script>
+  var s1 = document.querySelector('#s1');
+  var s2 = document.querySelector('#s2');
+  var btn1 = document.getElementById('btn1');
+  var btn2 = document.getElementById('btn2');
+  var btn3 = document.getElementById('btn3');
+  var btn4 = document.getElementById('btn4');
+  // 1:全部往右
+  btn1.onclick = function(){
+      var arr = getLis(s1);
+      arr.forEach(function (v) {
+          s2.appendChild(v);
+      })
+  };
+  // 2:全部往左
+  btn2.onclick = function(){
+      var arr = getLis(s2);
+      arr.forEach(function(v){
+          s1.appendChild(v);
+      })
+  };
+  //3：选中往右
+  btn3.onclick = function(){
+      var arr = getLis(s1);
+      arr.forEach(function (v) {
+          if(v.selected){
+              s2.appendChild(v);
+          }
+      })
+  };
+// 4:选中往左
+  btn4.onclick = function(){
+      var arr = getLis(s2);
+      arr.forEach(function (v) {
+          if(v.selected){
+              s1.appendChild(v);
+          }
+      })
+  };
+
+  function getLis(dom) {
+      var lis = dom.children;
+      var arr = [];
+      [].push.apply(arr,lis);
+      return arr;
+  }
+</script>
+
+</body>
+</html>

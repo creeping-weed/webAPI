@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table {
+      border: 1px solid #000;
+      /*边框合并*/
+      border-collapse: collapse;
+    }
+
+    th {
+      border: 1px solid #000;
+      height: 40px;
+      background-color: #ccc;
+    }
+
+    td {
+      border: 1px solid #000;
+      height: 30px;
+      text-align: center;
+      padding: 0 30px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+
+
+
+  //js对象  json  ajax
+  var data = {
+    "header": ["姓名", "性别", "年龄", "描述"],
+    "content": [
+      {"name":"王琨", "gender":"女", "age":30, "desc":"曾经是个王者"},
+      {"name":"王梦茹", "gender":"女", "age":18, "desc":"小仙女"},
+      {"name":"罗杰", "gender":"男", "age":23, "desc":"海贼王船长"},
+      {"name":"袁小雨", "gender":"男", "age":38, "desc":"打酱油的"},
+      {"name":"黄张龙", "gender":"女", "age":28, "desc":"社会我龙哥，人狠话不多"},
+      {"name":"王浩", "gender":"男", "age":23, "desc":"死基佬，死基佬"},
+      {"name":"孙广明", "gender":"男", "age":3, "desc":"学霸，大神"}
+    ]
+  };
+
+  //需求：根据data对象创建表格
+  //1. 创建一个table，添加到body
+  //2. 创建一个thead，添加到table
+    //2.1 创建一个tr，添加到thead
+    //2.2 创建多个th, 添加到tr中， 设置内容
+  //3. 创建tbody，添加到table
+    //3.1 创建多个tr，添加tbody
+    //3.2 创建多个td，添加到tr中， 设置内容
+
+  var table = document.createElement('table');
+  document.body.appendChild(table);
+  var thead = document.createElement('thead');
+  table.appendChild(thead);
+  var tr = document.createElement('tr');
+  thead.appendChild(tr);
+  for(var i = 0; i < data.header.length; i++){
+      var th = document.createElement('th');
+      th.innerText = data.header[i];
+      tr.appendChild(th);
+  }
+  var th = document.createElement('th');
+  th.innerText = '操作';
+  tr.appendChild(th);
+
+  var tbody = document.createElement('tbody');
+  table.appendChild(tbody);
+  for(var i = 0; i<data.content.length; i++){
+      var trs = document.createElement('tr');
+      tbody.appendChild(trs);
+      for(var k in data.content[i]){
+          var td = document.createElement('td');
+          td.innerText = data.content[i][k];
+          trs.appendChild(td);
+      }
+      var td = document.createElement('td');
+      trs.appendChild(td);
+      var button = document.createElement('button');
+      td.appendChild(button);
+      button.innerText = '删除';
+      button.onclick = function(){
+          this.parentNode.parentNode.remove();
+      }
+  }
+
+</script>
+
+</body>
+</html>

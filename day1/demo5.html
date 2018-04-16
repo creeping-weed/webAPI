@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webAPI</title>
+</head>
+<body>
+<button>选择</button>
+<select>
+    <option>小明</option>
+    <option>小蓝</option>
+    <option>小红</option>
+    <option>小美</option>
+    <option>小江</option>
+</select>
+<script>
+    // 下拉框选中
+    var ops = document.querySelectorAll('option');
+    var btn = document.querySelector('button');
+    btn.onclick = function () {
+        var random = parseInt(Math.random()*ops.length);
+        ops[random].selected = true;
+    }
+</script>
+</body>
+</html>
